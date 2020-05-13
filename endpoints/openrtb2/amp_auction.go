@@ -288,7 +288,7 @@ func (deps *endpointDeps) loadRequestJSONForAmp(httpRequest *http.Request) (req 
 	req = &openrtb.BidRequest{}
 	errs = nil
 
-	ampID := httpRequest.FormValue("tag_id")
+	ampID := strings.ReplaceAll(httpRequest.FormValue("tag_id"), "/", "-")
 	if ampID == "" {
 		errs = []error{errors.New("AMP requests require an AMP tag_id")}
 		return
